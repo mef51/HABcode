@@ -1,0 +1,17 @@
+The GPS dumps its data to /dev/ttyS0. 
+
+To check what location the GPS is reporting run:
+gpsmon /dev/ttyS0
+
+To see the raw output do
+cat /dev/ttyS0
+
+http://www.instructables.com/id/Raspberry-Pi-the-Neo-6M-GPS/
+
+GPS uses the NMEA protocol: http://www.gpsinformation.org/dale/nmea.htm#GGA
+	* The GPS info is in the GPGGA line (GGA message)
+	
+Notes about UART and ttyS0 vs ttyAMA0:
+	* https://spellfoundry.com/2016/05/29/configuring-gpio-serial-port-raspbian-jessie-including-pi-3/
+	
+
