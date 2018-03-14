@@ -37,8 +37,8 @@ if __name__ == '__main__':
 		while True:
 			line = ser.readline()
 			line = line.strip()
-			line = line.decode('utf-8')
 			try:
+				line = line.decode('utf-8')
 				msg = pynmea2.parse(line, check=False)
 				if isinstance(msg, pynmea2.types.talker.GGA):
 					GGAmsg = msg
@@ -48,6 +48,8 @@ if __name__ == '__main__':
 				print('ignoring checksum error')
 			except pynmea2.nmea.ParseError:
 				print('ignoring parse error')
+			except UnicodeDecodeError:
+				print('ignoring unicode error')
 				
 			if GGAmsg and RMCmsg:
 				handleGPSmsg(GGAmsg, RMCmsg)
