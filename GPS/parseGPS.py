@@ -21,12 +21,12 @@ def handleGPSmsg(GGAmsg, RMCmsg):
 	
 	msg = GGAmsg
 	altitude = msg.altitude
-	time = msg.timestamp
+	timestmp = msg.timestamp
 	
 	longitude = '%02d°%02d′%07.4f″' % (msg.longitude, msg.longitude_minutes, msg.longitude_seconds)
 	latitude = '%02d°%02d′%07.4f″' % (msg.latitude, msg.latitude_minutes, msg.latitude_seconds)
 	
-	print(str(time)+" UTC:", latitude, longitude, 'alt:', altitude, 'meters spd:', '{:.3f}'.format(speed), "m/s")
+	print(str(timestmp)+" UTC:", latitude, longitude, 'alt:', altitude, 'meters spd:', '{:.3f}'.format(speed), "m/s")
 	
 
 if __name__ == '__main__':
