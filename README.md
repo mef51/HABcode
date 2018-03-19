@@ -8,3 +8,4 @@ Sensors:
   * CO2
   * Ozone
   * Methane
+  * Camera
