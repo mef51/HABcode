@@ -27,9 +27,10 @@ vs, video stabilization
 
 30 fps 
 
-## Current issue: can FAT systems save files larger than 2 GB
+## Tested with the above settings:
 
-Will test, if not we will need a script to take multiple videos.
+2 hr recording =  2.56 GB
+4 hr recording = 12.45 GB
 
 ## Video formating:
 
