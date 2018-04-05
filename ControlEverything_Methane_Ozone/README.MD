@@ -30,3 +30,10 @@ https://github.com/ControlEverythingCommunity/ADC121C_MQ4.git
 ### Ozone
 
 https://github.com/ControlEverythingCommunity/ADC121C_MQ131
+
+### Address Jumpers
+
+Since both Ozone and Methane use the address 0x50 by default, you need to move the connectors on on of the address jumpers on the module. I moved the address jumpers on the Ozone unit to cover the front four pins change the address to 0x5a
+
+You can check the current I2C address with:
+```sudo i2cdetect -y 1```
