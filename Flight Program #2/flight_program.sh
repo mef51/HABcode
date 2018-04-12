@@ -1,7 +1,7 @@
 #!/bin/bash
 
 echo "Starting video.";
-raspivid -t 21600000 -vs -w 1640 -h 1232 -fps 30 -b 15000000 -o flight.h264 &
+raspivid -t 21600000 -vs -w 1640 -h 1232 -fps 30 -b 15000000 -o $(date +"%T")_flight.h264 &
 
 echo "Entering sensor loop.";
 while :
