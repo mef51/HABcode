@@ -10,6 +10,7 @@ do
 	python BME.py
 
 	## TODO: ADD IN UV SCRIPT
+	## TODO: ADD IN CO2 SCRIPT
 
 	sleep 1		# the amount of time we wait before taking a reading in seconds.
 done
