@@ -3,7 +3,7 @@
 import serial
 import time
 
-ser = serial.Serial("/dev/ttyUSB1",baudrate =9600,timeout = 1)
+ser = serial.Serial("/dev/ttyUSB1 ",baudrate =9600,timeout = 1)
 print "  AN-137: Raspberry Pi3 to K-30 Via UART\n"
 ser.flushInput()
 time.sleep(1)

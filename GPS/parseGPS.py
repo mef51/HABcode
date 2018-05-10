@@ -9,7 +9,7 @@ import pynmea2
 
 from subprocess import call
 from time import sleep
-port = '/dev/ttyS0'
+port = '/dev/ttyAMA0'
 baud = 9600 # pulse rate of port
 callSign = 'VE3UWO-1'
 
