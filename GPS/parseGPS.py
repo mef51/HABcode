@@ -6,8 +6,12 @@
 ###
 import serial
 import pynmea2
+
+from subprocess import call
+from time import sleep
 port = '/dev/ttyS0'
 baud = 9600 # pulse rate of port
+callSign = 'VE3UWO-1'
 
 def handleGPSmsg(GGAmsg, RMCmsg):
 	"""
@@ -27,6 +31,21 @@ def handleGPSmsg(GGAmsg, RMCmsg):
 	latitude = '%02d°%02d′%07.4f″' % (msg.latitude, msg.latitude_minutes, msg.latitude_seconds)
 	
 	print(str(timestmp)+" UTC:", latitude, longitude, 'alt:', altitude, 'meters spd:', '{:.3f}'.format(speed), "m/s")
+
+	message = "Latitude: " + str(latitude) + " Longitude: " + str(longitude) + " Altitude" + str(altitude) + " Speed: " + '{:.3f}'.format(speed) + "m/s"
+
+	if not call(['aprs', '-c', callSign, '-o', 'packet.wav',  message]):
+		print("APRS packet created with message: " + message)
+	else
+		print("There was an error creating the APRS packet")
+
+	if not call(['./sendAprs.sh'])
+		print("APRS packet sent!")
+	else
+		print("APRS packet not sent!")
+
+	sleep(30)
+
 	
 
 if __name__ == '__main__':
