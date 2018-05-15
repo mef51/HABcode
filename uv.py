@@ -81,7 +81,7 @@ try:
 
                 print uv_value
 
-                time.sleep(2)
+                time.sleep(1)
 
 
 ##cleanup pins on CTRL+C
