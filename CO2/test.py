@@ -3,12 +3,12 @@
 import serial
 import time
 
-ser = serial.Serial("/dev/ttyUSB0",baudrate =9600,timeout = 1)
+ser = serial.Serial("/dev/ttyUSB1",baudrate =9600,timeout = 1)
 print "  AN-137: Raspberry Pi3 to K-30 Via UART\n"
 ser.flushInput()
 time.sleep(1)
 
-for i in range(1,21):
+for i in range(1,20):
 	ser.flushInput()
 	ser.write("\xFE\x44\x00\x08\x02\x9F\x25")
     	time.sleep(.5)
