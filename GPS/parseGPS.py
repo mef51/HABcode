@@ -36,12 +36,12 @@ def handleGPSmsg(GGAmsg, RMCmsg):
 
 	if not call(['aprs', '-c', callSign, '-o', 'packet.wav',  message]):
 		print("APRS packet created with message: " + message)
-	else
+	else:
 		print("There was an error creating the APRS packet")
 
 	if not call(['./sendAprs.sh'])
 		print("APRS packet sent!")
-	else
+	else:
 		print("APRS packet not sent!")
 
 	sleep(30)
