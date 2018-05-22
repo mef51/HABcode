@@ -9,3 +9,14 @@ Sensors:
   * Ozone
   * Methane
   * Camera
+
+To start the flight program run:
+
+```bash
+./flightprogram.sh
+```
+
+To monitor the science log do:
+```bash
+less +GF flightlog*
+```

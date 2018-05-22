@@ -10,21 +10,32 @@ import time, datetime
 
 # Get I2C bus
 bus = smbus.SMBus(1)
-sampleTime = 1 # seconds 
 
-# ADC121C_MQ131 address, 0x50(80)
-# Read data back from 0x00(00), 2 bytes
-# raw_adc MSB, raw_adc LSB
-while True:
+def getOzoneData():
 	data = bus.read_i2c_block_data(0x50, 0x00, 2)
 
 	# Convert the data to 12-bits
 	raw_adc = (data[0] & 0x0F) * 256 + data[1]
 	ppm = (1.99 * raw_adc) / 4096.0 + 0.01
-	
-	timestmp = ((str(datetime.datetime.utcnow())).split(' ')[1]).split('.')[0]
-	time.sleep(sampleTime)
+	return ppm
+
+if __name__ == '__main__':
+
+	sampleTime = 1 # seconds
+
+	# ADC121C_MQ131 address, 0x50(80)
+	# Read data back from 0x00(00), 2 bytes
+	# raw_adc MSB, raw_adc LSB
+	while True:
+		data = bus.read_i2c_block_data(0x50, 0x00, 2)
+
+		# Convert the data to 12-bits
+		raw_adc = (data[0] & 0x0F) * 256 + data[1]
+		ppm = (1.99 * raw_adc) / 4096.0 + 0.01
+
+		timestmp = ((str(datetime.datetime.utcnow())).split(' ')[1]).split('.')[0]
+		time.sleep(sampleTime)
 
 
-	# Output data to screen
-	print timestmp, "UTC", "Ozone Concentration : %.2f ppm" %ppm
+		# Output data to screen
+		print timestmp, "UTC", "Ozone Concentration : %.2f ppm" %ppm
