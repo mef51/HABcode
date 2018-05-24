@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/python3
 # Distributed with a free-will license.
 # Use it any way you want, profit or free, provided it fits in the licenses of its associated works.
 # ADC121C_MQ131
@@ -38,4 +38,4 @@ if __name__ == '__main__':
 
 
 		# Output data to screen
-		print timestmp, "UTC", "Ozone Concentration : %.2f ppm" %ppm
+		print(timestmp, "UTC", "Ozone Concentration : %.2f ppm" %ppm)

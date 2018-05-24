@@ -12,5 +12,5 @@ echo "Starting FTU"
 echo "Starting Science Log in 5 seconds..."
 # sleep to allow us to see errors from the video, GPS, or FTU
 sleep 5
-echo "Science logged at " `ls *.csv`
+echo "Science log started"
 ./logScience.py

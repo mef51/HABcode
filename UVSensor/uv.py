@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/python3
 
 import time
 import os
@@ -96,7 +96,7 @@ if __name__ == '__main__':
 			uvLog.write(localtime + ", "+ str(int(uv_value)) + "\n")
 			uvLog.close()
 
-			print uv_value
+			print(uv_value)
 
 			time.sleep(1)
 

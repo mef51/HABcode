@@ -13,31 +13,31 @@ import time
 try:
 	from PressTempHum import parseBME
 except:
-	pass
+	print("failed BME import")
 try:
 	from ControlEverything_Methane_Ozone.Methane import ADC121C_MQ4
 except:
-	pass
+	print("Failed Methane import")
 try:
 	from ControlEverything_Methane_Ozone.Ozone import ADC121C_MQ131
 except:
-	pass
+	print("Failed Ozone import")
 try:
 	from CO2 import CO2
 except:
-	pass
+	print("failed co2 import")
 try:
 	from UVSensor import uv
 except:
-	pass
+	print("failed UV import")
 try:
 	from GeigerCounter import GeigerCounter
 except:
-	pass
-try:
-	from GPS import parseGPS
-except:
-	pass
+	print("failed geiger import")
+#try:
+#	from GPS import parseGPS
+#except:
+#	print("failed gps import")
 
 def getTimeAndDate():
 	date = datetime.now()
@@ -81,6 +81,7 @@ if __name__ == '__main__':
 				row['lat'] = lat
 				row['lng'] = lng
 				sensorFailures[0] = False
+				print('stuck in gps')
 			except Exception:
 				sensorFailures[0] = True
 

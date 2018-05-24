@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/python3
 # Distributed with a free-will license.
 # Use it any way you want, profit or free, provided it fits in the licenses of its associated works.
 # ADC121C_MQ4
@@ -36,5 +36,5 @@ if __name__ == '__main__':
 		time.sleep(sampleTime)
 
 		# Output data to screen
-		print timestmp, "UTC", "Methane concentration : %.2f ppm" %ppm
+		print(timestmp, "UTC", "Methane concentration : %.2f ppm" %ppm)
 
