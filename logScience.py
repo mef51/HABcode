@@ -22,14 +22,14 @@ try:
 	from ControlEverything_Methane_Ozone.Ozone import ADC121C_MQ131
 except:
 	print("Failed Ozone import")
-try:
-	from CO2 import CO2
-except:
-	print("failed co2 import")
-try:
-	from UVSensor import uv
-except:
-	print("failed UV import")
+#try:
+#	from CO2 import CO2
+#except:
+#	print("failed co2 import")
+#try:
+#	from UVSensor import uv
+#except:
+#	print("failed UV import")
 try:
 	from GeigerCounter import GeigerCounter
 except:
@@ -49,7 +49,7 @@ if __name__ == '__main__':
 	sampleTime = 1 # second
 	logfile = 'flightlog_{}.csv'.format(getTimeAndDate()[1])
 	fieldnames = ['time',
-					'alt(m)',
+					'alt',
 					'lat',
 					'lng',
 					'temp(C)',
@@ -71,17 +71,15 @@ if __name__ == '__main__':
 			sensors = ['GPS', 'BME', 'CH4', 'O3', 'CO2', 'UV', 'Geiger']
 
 			# get time
-			timestr = getTimeAndDate()[0]
-			row['time'] = timestr
 
 			try:
 				# get GPS
 				alt, lat, lng = parseGPS.getGPSLogData()
+				print(alt, lat, lng)
 				row['alt'] = alt
 				row['lat'] = lat
 				row['lng'] = lng
 				sensorFailures[0] = False
-				print('stuck in gps')
 			except Exception:
 				sensorFailures[0] = True
 
@@ -134,6 +132,9 @@ if __name__ == '__main__':
 				sensorFailures[6] = False
 			except Exception:
 				sensorFailures[6] = True
+
+			timestr = getTimeAndDate()[0]
+			row['time'] = timestr
 
 			if True in sensorFailures:
 				failedSensors = ''

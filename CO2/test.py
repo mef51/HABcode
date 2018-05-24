@@ -1,3 +1,5 @@
+#!/usr/bin/python
+
 #rpi serial connections
 #Python app to run a K-30 Sensor
 import serial

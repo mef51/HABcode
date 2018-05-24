@@ -32,14 +32,14 @@ def handleGPSmsg(GGAmsg, RMCmsg):
 
 	print(str(timestmp)+" UTC:", latitude, longitude, 'alt:', altitude, 'meters spd:', '{:.3f}'.format(speed), "m/s")
 
-	message = "Latitude: " + str(latitude) + " Longitude: " + str(longitude) + " Altitude" + str(altitude) + " Speed: " + '{:.3f}'.format(speed) + "m/s"
+        message = "UTC: " + str(timestmp) +  "Latitude: " + str(latitude) + " Longitude: " + str(longitude) + " Altitude" + str(altitude) + " Speed: " + '{:.3f}'.format(speed) + "m/s"
 
 	if not call(['aprs', '-c', callSign, '-o', 'packet.wav',  message]):
 		print("APRS packet created with message: " + message)
 	else:
 		print("There was an error creating the APRS packet")
 
-	if not call(['./Documents/HABcode/GPS/sendAPRS.sh']):
+	if not call(['/home/pi/HABcode/GPS/sendAPRS.sh']):
 		print("APRS packet sent!")
 	else:
 		print("APRS packet not sent!")

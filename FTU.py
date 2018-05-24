@@ -1,12 +1,11 @@
-from gpiozero import Button, OutputDevice
-from time import sleep
-button = Button(14)
-led = OutputDevice(2)
+#!/usr/bin/python3
 
-print ("Ready")
-button.wait_for_press()
-led.on()
-print("pop!")
-sleep(120)
-print("Popping done")
-led.off()
+import RPi.GPIO as GPIO
+from time import sleep
+
+GPIO.setmode(GPIO.BOARD)
+GPIO.setup(37, GPIO.OUT)
+GPIO.output(37, 0)
+
+sleep(9000)
+GPIO.output(37, 1)
