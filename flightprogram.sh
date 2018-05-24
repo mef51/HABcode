@@ -7,7 +7,8 @@ echo "Start GPS Transmitter"
 ./home/pi/Documents/HABcode/GPS/parseGPS.py &
 
 echo "Starting FTU"
-# ???
+./FTU.py &
+echo "Don't forget to restart countdown before launch"
 
 echo "Starting Science Log in 5 seconds..."
 # sleep to allow us to see errors from the video, GPS, or FTU
