@@ -73,12 +73,16 @@ if __name__ == '__main__':
 			# get time
 
 			try:
-				# get GPS
-				alt, lat, lng = parseGPS.getGPSLogData()
-				print(alt, lat, lng)
-				row['alt'] = alt
-				row['lat'] = lat
-				row['lng'] = lng
+				# get GPS data from the local GPS log (yes, this is a hack)
+				gpslog = 'GPS/gpslog_{}.csv'.format(getTimeAndDate()[1])
+				lastUpdate = {}
+				with open(gpslog) as csvfile:
+					reader = csv.DictReader(csvfile)
+					for row in reader:
+						lastUpdate = row
+				row['alt'] = lastUpdate['alt']
+				row['lat'] = lastUpdate['lat']
+				row['lng'] = lastUpdate['lng']
 				sensorFailures[0] = False
 			except Exception:
 				sensorFailures[0] = True

@@ -8,10 +8,18 @@ import serial
 import pynmea2
 from subprocess import call
 from time import sleep
-port = '/dev/ttyAMA0'
+from datetime import datetime
+import csv
 
+port = '/dev/ttyAMA0'
 baud = 9600 # pulse rate of port
 callSign = 'VE3UWO-1'
+
+def getTimeAndDate():
+	date = datetime.now()
+	timestr = '{}:{}:{:02d}EDT'.format(date.hour, date.minute, date.second)
+	datestr = '{}-{:02d}-{:02d}'.format(date.year, date.month, date.day)
+	return (timestr, datestr)
 
 def handleGPSmsg(GGAmsg, RMCmsg):
 	"""
@@ -32,8 +40,9 @@ def handleGPSmsg(GGAmsg, RMCmsg):
 
 	print(str(timestmp)+" UTC:", latitude, longitude, 'alt:', altitude, 'meters spd:', '{:.3f}'.format(speed), "m/s")
 
-        message = "UTC: " + str(timestmp) +  "Latitude: " + str(latitude) + " Longitude: " + str(longitude) + " Altitude" + str(altitude) + " Speed: " + '{:.3f}'.format(speed) + "m/s"
+	message = "UTC: " + str(timestmp) +  "Latitude: " + str(latitude) + " Longitude: " + str(longitude) + " Altitude" + str(altitude) + " Speed: " + '{:.3f}'.format(speed) + "m/s"
 
+	# transmit
 	if not call(['aprs', '-c', callSign, '-o', 'packet.wav',  message]):
 		print("APRS packet created with message: " + message)
 	else:
@@ -43,6 +52,12 @@ def handleGPSmsg(GGAmsg, RMCmsg):
 		print("APRS packet sent!")
 	else:
 		print("APRS packet not sent!")
+
+	# log gps data locally
+	logfile = 'gpslog_{}.csv'.format(getTimeAndDate()[1])
+	with open(logfile, 'a', 1) as csvfile:
+		writer = csv.DictWriter(csvfile, fieldnames=['time', 'alt', 'lat', 'lng'])
+		writer.writerow({'time': getTimeAndDate()[0], 'alt': str(altitude), 'lat': str(latitude), 'lng': str(longitude)})
 
 	sleep(15)
 
@@ -81,6 +96,12 @@ def getGPSLogData():
 
 
 if __name__ == '__main__':
+	# start local log
+	logfile = 'gpslog_{}.csv'.format(getTimeAndDate()[1])
+	with open(logfile, 'a', 1) as csvfile:
+		writer = csv.DictWriter(csvfile, fieldnames=['time', 'alt', 'lat', 'lng'])
+		writer.writeheader()
+
 	ser = serial.Serial(port, baud)
 	GGAmsg = None # location info
 	RMCmsg = None # speed info
