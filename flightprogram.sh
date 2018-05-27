@@ -10,6 +10,9 @@ echo "Starting FTU"
 ./FTU.py &
 echo "Don't forget to restart countdown before launch"
 
+echo "Starting CO2 sensor"
+./home/pi/Documents/HABcode/CO2/CO2.py &
+
 echo "Starting Science Log in 5 seconds..."
 # sleep to allow us to see errors from the video, GPS, or FTU
 sleep 5

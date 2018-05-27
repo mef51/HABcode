@@ -22,6 +22,10 @@ def getCO2Data():
 		return ''
 
 if __name__ == '__main__':
+	date = datetime.now()
+	logfile = "CO2log_%04d-%02d-%02d.csv" % (date.year, date.month, date.day)
+	with open (logfile, "a") as log:
+		log.write('time,co2\n')
 	while (1):
 		ser.flushInput()
 		string = '\xFE\x44\x00\x08\x02\x9F\x25'
@@ -32,10 +36,10 @@ if __name__ == '__main__':
 			high = ord(resp[3])
 			low = ord(resp[4])
 			co2 = (high * 256) + low
-			msg = "%s, %s \n" %(datetime.now(), co2)
-			with open ("/home/pi/Documents/CO2log.txt", "a") as log:
-					log.write(msg)
-			print(" CO2 = " +str(co2))
+			msg = "%s,%s\n" %(datetime.now(), co2)
+			with open (logfile, "a") as log:
+				log.write(msg)
+				# print(" CO2 = " +str(co2))
 		except:
-                        print("Please work")
+			print("Please work")
 		time.sleep(2)

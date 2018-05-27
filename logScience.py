@@ -115,8 +115,17 @@ if __name__ == '__main__':
 
 			try:
 				# get CO2. Note getCO2Data() sleeps for 0.5 seconds
-				CO2_ppm = CO2.getCO2Data()
-				row['CO2'] = str(CO2_ppm)
+				# CO2_ppm = CO2.getCO2Data()
+
+				# get CO2 data from local log (hack)
+				CO2log = 'CO2/CO2log_{}.csv'.format(getTimeAndDate()[1])
+				lastUpdate = {}
+				with open(CO2log) as csvfile:
+					reader = csv.DictReader(csvfile)
+					for row in reader:
+						lastUpdate = row
+
+				row['CO2'] = lastUpdate['co2']
 				sensorFailures[4] = False
 			except Exception:
 				sensorFailures[4] = True
