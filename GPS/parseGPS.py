@@ -35,12 +35,15 @@ def handleGPSmsg(GGAmsg, RMCmsg):
 	altitude = msg.altitude
 	timestmp = msg.timestamp
 
-	longitude = '%02d°%02d′%07.4f″' % (msg.longitude, msg.longitude_minutes, msg.longitude_seconds)
-	latitude = '%02d°%02d′%07.4f″' % (msg.latitude, msg.latitude_minutes, msg.latitude_seconds)
+	longitudeDecimal = '{:02.6f} {1}'.format(msg.lon, msg.lon_dir)
+	latitudeDecimal = '{:02.6f} {1}'.format(msg.lat, msg.lat_dir)
 
-	print(str(timestmp)+" UTC:", latitude, longitude, 'alt:', altitude, 'meters spd:', '{:.3f}'.format(speed), "m/s")
+	#longitude = '%02d°%02d′%07.4f″' % (msg.longitude, msg.longitude_minutes, msg.longitude_seconds)
+	#latitude = '%02d°%02d′%07.4f″' % (msg.latitude, msg.latitude_minutes, msg.latitude_seconds)
 
-	message = "UTC: " + str(timestmp) +  "Latitude: " + str(latitude) + " Longitude: " + str(longitude) + " Altitude" + str(altitude) + " Speed: " + '{:.3f}'.format(speed) + "m/s"
+	print(str(timestmp)+" UTC:", latitudeDecimal, longitudeDecimal, 'alt:', altitude, 'meters spd:', '{:.3f}'.format(speed), "m/s")
+
+	message = "UTC: " + str(timestmp) +  "Latitude: " + str(latitudeDecimal) + " Longitude: " + str(longitudeDecimal) + " Altitude" + str(altitude) + " Speed: " + '{:.3f}'.format(speed) + "m/s"
 
 	# transmit
 	if not call(['aprs', '-c', callSign, '-o', 'packet.wav',  message]):
@@ -57,7 +60,7 @@ def handleGPSmsg(GGAmsg, RMCmsg):
 	logfile = 'gpslog_{}.csv'.format(getTimeAndDate()[1])
 	with open(logfile, 'a', 1) as csvfile:
 		writer = csv.DictWriter(csvfile, fieldnames=['time', 'alt', 'lat', 'lng'])
-		writer.writerow({'time': getTimeAndDate()[0], 'alt': str(altitude), 'lat': str(latitude), 'lng': str(longitude)})
+		writer.writerow({'time': getTimeAndDate()[0], 'alt': str(altitude), 'lat': str(latitudeDecimal), 'lng': str(longitudeDecimal)})
 
 	sleep(15)
 
