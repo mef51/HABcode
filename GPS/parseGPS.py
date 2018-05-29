@@ -35,8 +35,8 @@ def handleGPSmsg(GGAmsg, RMCmsg):
 	altitude = msg.altitude
 	timestmp = msg.timestamp
 
-	longitudeDecimal = '{:02.6f} {1}'.format(msg.lon, msg.lon_dir)
-	latitudeDecimal = '{:02.6f} {1}'.format(msg.lat, msg.lat_dir)
+	longitudeDecimal = '{:02.6f} {}'.format(msg.lon, msg.lon_dir)
+	latitudeDecimal = '{:02.6f} {}'.format(msg.lat, msg.lat_dir)
 
 	#longitude = '%02d°%02d′%07.4f″' % (msg.longitude, msg.longitude_minutes, msg.longitude_seconds)
 	#latitude = '%02d°%02d′%07.4f″' % (msg.latitude, msg.latitude_minutes, msg.latitude_seconds)
